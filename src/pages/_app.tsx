@@ -14,10 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     AOS.init({
       duration: 800,
-      once: false, // This makes animations happen every time
-      mirror: true, // Animations will trigger on both scroll down and up
-      easing: "ease-in-out", // Optional: smoother animations
-      offset: 120, // Optional: adjust when animations trigger
+      once: false,
+      mirror: true,
+      easing: "ease-in-out",
+      offset: 120,
     });
 
     const timer = setTimeout(() => {
