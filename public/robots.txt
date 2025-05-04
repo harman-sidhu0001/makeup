@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kamnamakeup.com
+
+# Sitemaps
+Sitemap: https://kamnamakeup.com/sitemap.xml
