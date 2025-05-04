@@ -6,6 +6,7 @@ interface GalleryItem {
   img: string;
   title: string;
   description: string;
+  marginTop: string;
 }
 
 const Gallery: React.FC = () => {
@@ -13,34 +14,81 @@ const Gallery: React.FC = () => {
 
   const galleryItems: GalleryItem[] = [
     {
-      img: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&auto=format&fit=crop&w=880&q=80",
-      title: "Traditional Bridal",
-      description: "Classic bridal look with soft smokey eyes and nude lips",
+      img: "/photo13.jpg",
+      title: "Radiant Muse",
+      description:
+        "Soft glam with glowing skin and subtle drama for timeless elegance",
+      marginTop: "0px",
     },
     {
-      img: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+      img: "/photo6.jpg",
+      title: "Ethereal Grace",
+      description:
+        "Dreamy tones and delicate details perfect for day weddings or receptions",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo3.jpg",
       title: "Editorial Glam",
       description: "High-fashion makeup for magazine shoots",
+      marginTop: "0px",
     },
     {
-      img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-      title: "Beach Wedding",
-      description: "Natural makeup that withstands tropical humidity",
+      img: "/photo2.jpg",
+      title: "Royal Vows",
+      description:
+        "Opulent bridal look inspired by regal traditions and elegance",
+      marginTop: "0px",
     },
     {
-      img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-      title: "Bridal Party",
-      description: "Coordinated looks for the entire wedding party",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
-      title: "Natural Beauty",
-      description: "Enhancing natural features with minimal makeup",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80",
+      img: "/photo7.jpg",
       title: "Creative Expression",
       description: "Artistic makeup for special events and photoshoots",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo4.jpg",
+      title: "Bridal Party",
+      description: "Coordinated looks for the entire wedding party",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo5.jpg",
+      title: "Natural Beauty",
+      description: "Enhancing natural features with minimal makeup",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo9.jpg",
+      title: "Bridal Bloom",
+      description:
+        "Flawless bridal look blending tradition with modern sophistication",
+      marginTop: "-20px",
+    },
+    {
+      img: "/photo10.jpg",
+      title: "Creative Expression",
+      description: "Artistic makeup for special events and photoshoots",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo11.jpg",
+      title: "Timeless Bride",
+      description:
+        "Classic Indian bridal glam with rich tones and radiant skin",
+      marginTop: "0px",
+    },
+    {
+      img: "/photo12.jpg",
+      title: "Blush & Tikka",
+      description: "Delicate pair with classic red bridal charm",
+      marginTop: "-35px",
+    },
+    {
+      img: "/photo14.jpg",
+      title: "Creative Expression",
+      description: "Artistic makeup for special events and photoshoots",
+      marginTop: "0px",
     },
   ];
 
@@ -80,9 +128,11 @@ const Gallery: React.FC = () => {
                 <Image
                   src={item.img}
                   alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  // sizes="(max-width: 768px) 100vw, 50vw"
+                  width={500}
+                  height={0}
                   className="object-cover group-hover:blur-sm transition duration-300"
+                  style={{ marginTop: item.marginTop }}
                 />
               </div>
               <div

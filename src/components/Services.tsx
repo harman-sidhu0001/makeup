@@ -5,6 +5,7 @@ interface Service {
   icon: string;
   title: string;
   description: string;
+  background: string;
   features: string[];
 }
 
@@ -25,34 +26,73 @@ const Services: React.FC = () => {
     {
       icon: "fa-heart",
       title: "Bridal Makeup",
+      background: "/photo1.jpg",
       description:
-        "Flawless makeup that lasts all day and photographs beautifully. Includes trial session to perfect your look.",
+        "Flawless bridal makeup that lasts all day and looks radiant in every photo.",
       features: [
-        "Traditional & Contemporary Styles",
-        "Airbrush & HD Makeup Options",
-        "Luxury Skincare Prep",
-      ],
-    },
-    {
-      icon: "fa-globe-americas",
-      title: "Destination Weddings",
-      description:
-        "Specialized services for weddings abroad with travel packages and on-location convenience.",
-      features: [
-        "Travel & Accommodation Arrangements",
-        "Climate-Adaptive Makeup",
-        "Bridal Party Packages",
+        "HD & Airbrush Options",
+        "Customized Skin Prep",
+        "Jewelry & Outfit Coordination",
       ],
     },
     {
       icon: "fa-star",
-      title: "Special Occasions",
+      title: "Reception Makeup",
+      background: "/photo2.jpg",
       description:
-        "Makeup services for engagements, anniversaries, photoshoots, and other memorable events.",
+        "Evening glam with bold, camera-ready looks for your post-wedding celebration.",
       features: [
-        "Red Carpet Glam",
-        "Editorial & Creative Makeup",
-        "Personalized Style Consultation",
+        "Smokey Eyes & Glossy Lips",
+        "Waterproof Long-Lasting Base",
+        "Modern Glam Touch",
+      ],
+    },
+    {
+      icon: "fa-gift",
+      title: "Shagun Makeup",
+      background: "/photo3.jpg",
+      description:
+        "Soft traditional makeup perfect for your Shagun or pre-wedding rituals.",
+      features: [
+        "Natural Blush Tones",
+        "Minimalistic Elegance",
+        "Quick & Fresh Finish",
+      ],
+    },
+    {
+      icon: "fa-ring",
+      title: "Engagement",
+      background: "/photo4.jpg",
+      description:
+        "Timeless makeup with elegant glam for your engagement ceremony.",
+      features: [
+        "Glowing Base Makeup",
+        "Contouring & Highlights",
+        "Hair Styling Options",
+      ],
+    },
+    {
+      icon: "fa-leaf",
+      title: "Mehndi Ceremony",
+      background: "/photo5.jpg",
+      description:
+        "Vibrant and playful makeup to match the colors and fun of the Mehndi event.",
+      features: [
+        "Bright & Fresh Look",
+        "Long-Lasting Lip Color",
+        "Lightweight & Comfortable",
+      ],
+    },
+    {
+      icon: "fa-glass-cheers",
+      title: "Party Makeup",
+      background: "/photo6.jpg",
+      description:
+        "Glamorous makeup for birthdays, cocktail parties, and other special evenings.",
+      features: [
+        "Bold Eyes or Bold Lips",
+        "Custom Looks on Request",
+        "Quick Touch-Up Kit",
       ],
     },
   ];
@@ -68,54 +108,63 @@ const Services: React.FC = () => {
             My Services
           </h2>
           <p
-            className="text-l text-gray-600 max-w-3xl mx-auto cursor-default"
+            className="text-lg text-gray-600 max-w-3xl mx-auto cursor-default"
             data-aos="fade-up"
             data-aos-duration="1500"
           >
-            From bridal makeup to destination weddings, I offer a range of
-            services to make you look and feel your best on your special day.
+            Whether it&aposs your big day or a special event, I craft the
+            perfect look for every occasion with personalized makeup artistry.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => (
             <div
               key={index}
-              className="service-card bg-white rounded-xl overflow-hidden shadow-lg p-8 "
+              className="relative rounded-xl overflow-hidden shadow-lg"
             >
-              <div className="text-pink-600 text-5xl mb-6">
-                <i className={`fas ${service.icon}`}></i>
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-top opacity-50"
+                style={{ backgroundColor: "pink" }}
+              ></div>
+
+              {/* Foreground Content */}
+              <div className="relative z-10 p-8 bg-white/80  rounded-xl h-full">
+                <div className="text-pink-600 text-5xl mb-6">
+                  <i className={`fas ${service.icon}`}></i>
+                </div>
+                <h3
+                  className="heading-font text-2xl font-bold text-gray-900 mb-4 cursor-default"
+                  data-aos="fade-up"
+                >
+                  {service.title}
+                </h3>
+                <p
+                  className="text-gray-600 mb-6 cursor-default"
+                  data-aos="fade-up"
+                >
+                  {service.description}
+                </p>
+                <ul className="space-y-2 mb-6 cursor-default">
+                  {service.features.map((feature, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center"
+                      data-aos="fade-up"
+                      data-aos-duration="1500"
+                    >
+                      <i className="fas fa-check text-pink-500 mr-2"></i>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => openBookingModal(service.title)}
+                  className="inline-block text-pink-600 font-medium hover:text-pink-700 cursor-pointer"
+                >
+                  Book Now <i className="fas fa-arrow-right ml-1"></i>
+                </button>
               </div>
-              <h3
-                className="heading-font text-2xl font-bold text-gray-900 mb-4 cursor-default"
-                data-aos="fade-up"
-              >
-                {service.title}
-              </h3>
-              <p
-                className="text-gray-600 mb-6 cursor-default"
-                data-aos="fade-up"
-              >
-                {service.description}
-              </p>
-              <ul className="space-y-2 mb-6 cursor-default">
-                {service.features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-center"
-                    data-aos="fade-up"
-                    data-aos-duration="1500"
-                  >
-                    <i className="fas fa-check text-pink-500 mr-2"></i>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => openBookingModal(service.title)}
-                className="inline-block text-pink-600 font-medium hover:text-pink-700 cursor-pointer"
-              >
-                Book Now <i className="fas fa-arrow-right ml-1"></i>
-              </button>
             </div>
           ))}
         </div>

@@ -25,6 +25,13 @@ const Contact: React.FC = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showToast, setShowToast] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false); // State to control loading spinner
+  const socialLinks = {
+    instagram: "https://www.instagram.com/kamnamakeupacademy/",
+    facebook: "https://www.facebook.com/",
+    pinterest: "https://www.pinterest.com/",
+    youtube: "https://www.youtube.com/",
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -44,13 +51,42 @@ const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateForm()) {
-      setToastMessage("Your message has been sent successfully!");
+    if (!validateForm()) return;
+
+    setLoading(true); // Show spinner when request is in progress
+
+    try {
+      const response = await fetch("http://localhost:8000/api/queries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setToastMessage("Your message has been sent successfully!");
+        setShowToast(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+        setTimeout(() => setShowToast(false), 3000);
+      } else {
+        setToastMessage(result.message || "Failed to send message.");
+        setShowToast(true);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setToastMessage("An error occurred. Please try again.");
       setShowToast(true);
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-      setTimeout(() => setShowToast(false), 3000);
+    } finally {
+      setLoading(false); // Hide spinner when request is done
     }
   };
 
@@ -175,8 +211,9 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-4 rounded-full text-lg font-medium transition duration-300"
+                  disabled={loading} // Disable the button while loading
                 >
-                  Send Message
+                  {loading ? "Submitting..." : "Send Message"}
                 </button>
               </div>
             </form>
@@ -196,7 +233,7 @@ const Contact: React.FC = () => {
                       Studio Location
                     </h4>
                     <p className="text-gray-600">
-                      123 Beauty Lane, xyz road
+                      Varindavan Gardens, F.G.C Road
                       <br />
                       Amritsar, Punjab
                     </p>
@@ -217,7 +254,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Call Us</h4>
-                    <p className="text-gray-600">(+91) 12345-67890</p>
+                    <p className="text-gray-600">(+91) 62804-13161</p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -241,17 +278,17 @@ const Contact: React.FC = () => {
               <div className="mt-8">
                 <h4 className="font-bold text-gray-900 mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
-                  {["instagram", "facebook", "pinterest", "youtube"].map(
-                    (social, index) => (
-                      <a
-                        key={index}
-                        href="#"
-                        className="text-pink-600 hover:text-pink-700 text-2xl"
-                      >
-                        <i className={`fab fa-${social}`}></i>
-                      </a>
-                    )
-                  )}
+                  {Object.entries(socialLinks).map(([social, url], index) => (
+                    <a
+                      key={index}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-pink-600 hover:text-pink-700 text-2xl mx-2"
+                    >
+                      <i className={`fab fa-${social}`}></i>
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

@@ -20,23 +20,23 @@ const Testimonials: React.FC = () => {
     {
       quote:
         "Kamna transformed my wedding day look beyond my expectations. My makeup lasted from morning until the last dance, and I received so many compliments. She's truly an artist!",
-      author: "Sarah J.",
+      author: "Charnjit K.",
       role: "Bride, June 2024",
-      img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+      img: "/photo1.jpg",
     },
     {
       quote:
-        "The Makeup Business Bootcamp gave me the confidence and tools to launch my freelance career. Within 3 months I was fully booked! Kamna's mentorship is invaluable.",
-      author: "Priya K.",
-      role: "Makeup Artist, Academy Graduate",
-      img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=688&q=80",
+        "Kamna gave me the exact glam I envisioned for my engagement. My photos turned out stunning and I felt so confident throughout the evening!",
+      author: "Priya S.",
+      role: "Engagement Makeup, March 2024",
+      img: "/photo7.jpg",
     },
     {
       quote:
-        "For our destination wedding in Bali, Kamna created the perfect look that photographed beautifully and withstood the tropical humidity. She's a true professional!",
-      author: "Emily & Mark",
+        "For our destination wedding in Jaipur, Kamna created the perfect look that photographed beautifully and withstood the tropical humidity. She's a true professional!",
+      author: "Arushi K.",
       role: "Destination Wedding, April 2023",
-      img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=686&q=80",
+      img: "/photo5.jpg",
     },
   ];
 

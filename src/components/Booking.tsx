@@ -29,6 +29,7 @@ const Booking: React.FC = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showToast, setShowToast] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -53,22 +54,47 @@ const Booking: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateForm()) {
-      setToastMessage(
-        "Your booking request has been submitted! We will contact you shortly."
-      );
-      setShowToast(true);
-      setFormData({
-        "booking-name": "",
-        "booking-email": "",
-        "booking-phone": "",
-        "booking-service": "",
-        "booking-date": "",
-        "booking-message": "",
+    if (!validateForm()) return;
+
+    setIsSubmitting(true); // Start submitting, set loading to true
+
+    try {
+      const response = await fetch("http://localhost:8000/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      setTimeout(() => setShowToast(false), 3000);
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setToastMessage(
+          "Your booking request has been submitted! We will contact you shortly."
+        );
+        setShowToast(true);
+        setFormData({
+          "booking-name": "",
+          "booking-email": "",
+          "booking-phone": "",
+          "booking-service": "",
+          "booking-date": "",
+          "booking-message": "",
+        });
+        setTimeout(() => setShowToast(false), 3000);
+      } else {
+        setToastMessage(
+          result.message || "Failed to submit booking. Please try again."
+        );
+        setShowToast(true);
+      }
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      setToastMessage("An error occurred. Please try again later.");
+      setShowToast(true);
+    } finally {
+      setIsSubmitting(false); // End submitting, set loading to false
     }
   };
 
@@ -104,6 +130,7 @@ const Booking: React.FC = () => {
                     errors["booking-name"] ? "error-input" : ""
                   }`}
                   required
+                  disabled={isSubmitting} // Disable input when submitting
                 />
                 {errors["booking-name"] && (
                   <div className="error">{errors["booking-name"]}</div>
@@ -126,6 +153,7 @@ const Booking: React.FC = () => {
                     errors["booking-email"] ? "error-input" : ""
                   }`}
                   required
+                  disabled={isSubmitting} // Disable input when submitting
                 />
                 {errors["booking-email"] && (
                   <div className="error">{errors["booking-email"]}</div>
@@ -150,6 +178,7 @@ const Booking: React.FC = () => {
                     errors["booking-phone"] ? "error-input" : ""
                   }`}
                   required
+                  disabled={isSubmitting} // Disable input when submitting
                 />
                 {errors["booking-phone"] && (
                   <div className="error">{errors["booking-phone"]}</div>
@@ -171,6 +200,7 @@ const Booking: React.FC = () => {
                     errors["booking-service"] ? "error-input" : ""
                   }`}
                   required
+                  disabled={isSubmitting} // Disable input when submitting
                 >
                   <option value="">Select a service</option>
                   <option value="Bridal Makeup">Bridal Makeup</option>
@@ -183,10 +213,7 @@ const Booking: React.FC = () => {
                   <option value="Other">Other</option>
                 </select>
                 {errors["booking-service"] && (
-                  <div className="error">
-                    {/* {errors['booking']} */}
-                    {errors["booking-service"]}
-                  </div>
+                  <div className="error">{errors["booking-service"]}</div>
                 )}
               </div>
             </div>
@@ -207,6 +234,7 @@ const Booking: React.FC = () => {
                   errors["booking-date"] ? "error-input" : ""
                 }`}
                 required
+                disabled={isSubmitting} // Disable input when submitting
               />
               {errors["booking-date"] && (
                 <div className="error">{errors["booking-date"]}</div>
@@ -226,14 +254,16 @@ const Booking: React.FC = () => {
                 value={formData["booking-message"]}
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-pink-500 focus:border-pink-500 text-white"
+                disabled={isSubmitting} // Disable textarea when submitting
               ></textarea>
             </div>
             <div className="pt-4">
               <button
                 type="submit"
                 className="w-full bg-pink-600 hover:bg-pink-700 text-white px-6 py-4 rounded-full text-lg font-medium transition duration-300"
+                disabled={isSubmitting} // Disable button when submitting
               >
-                Submit Booking Request
+                {isSubmitting ? "Submitting..." : "Submit Booking Request"}
               </button>
             </div>
           </form>
