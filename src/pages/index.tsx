@@ -19,7 +19,39 @@ const Home: React.FC = () => {
           name="description"
           content="Kamna Sharma Makeup and Hair Styling offers professional makeup and hair styling services for bridal, party, desitational wedding, traditional style, and special occasions. Book now!"
         />
+
+        {/* Open Graph Tags */}
+        <meta
+          property="og:title"
+          content="Kamna Sharma Makeup | Makeup & Hair Artist"
+        />
+        <meta
+          property="og:description"
+          content="Kamna Sharma Makeup and Hair Styling offers professional makeup and hair styling services for bridal, party, desitational wedding, traditional style, and special occasions. Book now!"
+        />
+        <meta
+          property="og:image"
+          content="https://kamnamakeup.com/photo6.jpg.jpg"
+        />
+        <meta property="og:url" content="https://kamnamakeup.com" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Kamna Sharma Makeup | Makeup & Hair Artist"
+        />
+        <meta
+          name="twitter:description"
+          content="Kamna Sharma Makeup and Hair Styling offers professional makeup and hair styling services for bridal, party, desitational wedding, traditional style, and special occasions. Book now!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://kamnamakeup.com/photo6.jpg.jpg"
+        />
       </Head>
+
       <div className="bg-gray-50">
         <Header />
         <Hero />
