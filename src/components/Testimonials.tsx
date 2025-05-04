@@ -26,7 +26,7 @@ const Testimonials: React.FC = () => {
     },
     {
       quote:
-        "Kamna gave me the exact glam I envisioned for my engagement. My photos turned out stunning and I felt so confident throughout the evening!",
+        "Kamna gave me the exact glam I envisioned for my engagement. My photos turned out stunning and I felt so confident throughout the evening! She's best artist in Amritsar, Punjab",
       author: "Priya S.",
       role: "Engagement Makeup, March 2024",
       img: "/photo7.jpg",
