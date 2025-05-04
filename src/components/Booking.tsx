@@ -62,7 +62,7 @@ const Booking: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://www.kamnamakeup.com//api/bookings",
+        "https://makeupbackend-kdle.onrender.com/api/bookings",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
