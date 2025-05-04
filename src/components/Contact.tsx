@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
     setLoading(true); // Show spinner when request is in progress
 
     try {
-      const response = await fetch("http://localhost:8000/api/queries", {
+      const response = await fetch("https://www.kamnamakeup.com//api/queries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

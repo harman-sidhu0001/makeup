@@ -61,11 +61,14 @@ const Booking: React.FC = () => {
     setIsSubmitting(true); // Start submitting, set loading to true
 
     try {
-      const response = await fetch("http://localhost:8000/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://www.kamnamakeup.com//api/bookings",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
 
